@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图</title>
+	<link rel="icon" href="../favicon.ico"/>
+    <script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&key=MPFBZ-CVSWU-ZSXVZ-G2LGR-BSJ5E-76BCJ"></script>
+    <style>
+        #mapContainer {
+            width: 100%;
+            height: 100%;
+			margin-top: 80px;
+        }
+		.nav{
+			width: 80%;
+			height: 100px;
+			margin: 10px auto;
+			display: flex;
+			justify-content: space-between;
+			position: fixed;
+			top: 0;
+			z-index: 1;
+		}
+		.nav img{
+			width: 150px;
+			height: 60px;
+			float: left;
+		/* 	margin-top: 30px; */
+			/* margin-left: 100px; */
+		}
+		.nav ul {
+			width: 80%;
+			list-style-type: none;
+			/* margin: auto; */
+			display: flex;
+			justify-content: space-between;
+		}
+		.nav ul li{
+			float: left;
+			font-weight: 700;
+			font-size: 20px;
+		}
+		.nav ul li a{
+			width: 400px;
+			height: 300px;
+			font-weight: 700;
+			text-decoration: none;
+			text-align: center;
+			color: #333;
+		
+		}
+		.nav ul li a:hover{
+			color: black;
+		}
+		.ABUIAB{
+			width:13%;
+			height: 100%;
+			/* float: right; */
+			margin-left: 40px;
+			color: #D6D8D4;
+			font-size: 15px;
+			line-height: 60px;
+		}
+    </style>
+</head>
+<body>
+	<div class="nav">
+		<img src="../img/ABUIABAEGAAgrZn8qQYo_p3xRDDIATh4!160x160.png.webp" >
+		<ul>
+			<li><a href="../Document.html">首页</a></li>
+			<li><a href="../pages/map.html">店铺地点</a></li>
+			<li><a href="../pages/apply.html">行业应用</a></li>
+			<li><a href="">智慧控制</a></li>
+			<li><a href="../pages/data.html">产品详细</a></li>
+			<li><a href="">关于我们</a></li>
+		</ul>
+		<div class="ABUIAB">
+			为客户创造价值!
+		</div>
+	</div>
+    <div id="mapContainer"></div>
+    <script>
+        // 初始化地图
+        function initMap() {
+            // 创建地图实例
+            var map = new TMap.Map(document.getElementById('mapContainer'), {
+                center: new TMap.LatLng(22.5455, 114.0598),
+                zoom: 17,  // 缩放级别
+            });
+			var marker = new TMap.MultiMarker({
+			            map: map,
+			            styles: {
+			                marker: new TMap.MarkerStyle({
+			                    width: 25,
+			                    height: 35,
+			                    anchor: { x: 16, y: 32 },
+			                    src: 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/markerDefault.png'
+			                })
+			            },
+			            geometries: [{
+			                id: 'demo-marker',
+			                styleId: 'marker',
+			                position: new TMap.LatLng(22.5455, 114.0598),
+			            }]
+			});
+        }
+        // 等待页面加载完毕后初始化地图
+        window.onload = initMap;
+    </script>
+</body>
+</html>

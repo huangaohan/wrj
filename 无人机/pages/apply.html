@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>行业应用</title>
+		<link rel="stylesheet" href="../css/apply.css" />
+		<link rel="icon" href="../favicon.ico"/>
+	</head>
+	<body>
+		<div class="nav">
+			<img src="../img/ABUIABAEGAAgrZn8qQYo_p3xRDDIATh4!160x160.png.webp"  loading="lazy">
+			<ul>
+				<li><a href="../pages/Document.html">首页</a></li>
+				<li><a href="../pages/map.html">店铺地点</a></li>
+				<li><a href="../pages/apply.html">行业应用</a></li>
+				<li><a href="">智慧控制</a></li>
+				<li><a href="../pages/data.html">产品详细</a></li>
+				<li><a href="">关于我们</a></li>
+			</ul>
+			<div class="ABUIAB">
+				为客户创造价值!
+			</div>
+		</div>
+		<div class="mian-img">
+			<img src="../img/ABUIABACGAAglur3qQYowJ2ICTCAFDiuCA.jpg" alt=""  loading="lazy"/>
+		</div>
+		<div style="width: 70%; border: 1px solid black; margin: auto; margin-top: 5px;"></div>
+		<div class="mian-list">
+			<ul style="margin: 0; padding: 0;">
+				<li><img src="../img/ABUIABACGAAglur3qQYowJ2ICTCAFDiuCA.jpg" alt="" class="img1" loading="lazy"></li>
+				<li><img src="../img/ABUIABACGAAglPP3qQYozK6bwgUwgBQ4owc!800x800.jpg.webp" alt="" class="img2" loading="lazy"></li>
+				<li><img src="../img/ABUIABACGAAg_oWLqAYow6mjzAMwgBQ4rgg.jpg" alt="" class="img3" loading="lazy"></li>
+				<li><img src="../img/ABUIABACGAAgwIn7lQYolNzj_gEwgBQ4rgg.jpg" alt="" class="img4" loading="lazy"></li>
+			</ul>
+		</div>
+		<div class="mian-list-text">
+			<h1 style="text-align: center;">DJI Mavic 3 Pro</h1>
+			<span>4/3 CMOS 哈苏相机 |<br /> 双焦段长焦相机 |<br /> Cine 版三摄支持 Apple ProRes 编码 |<br /> 43 分钟飞行时间 | 全向避障 |<br /> 15 公里高清图传</span>
+		</div>
+		<div class="main">
+			
+		</div>
+		<div class="leftNav-item for-top">
+				<a href="javascript:;" class="rota" style="text-decoration: none;color: black;">去顶部</a>
+		</div>
+		<div class="footer">
+			<div class="footer1">
+				<div>奇蛙智能联系信息</div>
+				<div>研发基地:南京江宁区启迪科技城立业园12楼</div>
+				<div>联系微信:RobotServices</div>
+				<div>腾讯 QQ:3589735743</div>
+				<div>联系邮箱:gongongfuwu@dingtalk.com</div>
+				<div>投诉微信:RobotHearting</div>
+				<div>投诉邮箱:eryanghuaqui@dingtalk.com</div>
+			</div>
+			<div class="footer1">
+				<div>奇蛙智能联系信息</div>
+				<div>商务交流合作:181-2018-4289</div>
+				<div>采购自荐合作:181-2018-4289</div>
+				<div>校企交流合作:177-2154-0142</div>
+				<div>区域代理合作:137-0147-8690</div>
+				<div>请在工作时间9:00-18:00联系</div>
+				<div>其它时间请发短信</div>
+			</div>
+			<div class="footer1">
+				<div>奇蛙智能联系信息</div>
+				<div>商务交流合作:181-2018-4289</div>
+				<div>采购自荐合作:181-2018-4289</div>
+				<div>校企交流合作:177-2154-0142</div>
+				<div>区域代理合作:137-0147-8690</div>
+				<div>请在工作时间9:00-18:00联系</div>
+				<div>其它时间请发短信</div>
+			</div>
+			<div style="width: 100%; border: 1px solid black;"></div>
+			<div style="text-align: center; margin-top: 20px;">©2024 版权所有</div>
+			<div style="text-align: center;">管理登录|苏ICP备15016330号-1</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+	<script src="../js/echarts.min.js"></script>
+	<script>
+	$(function () {
+		$(window).scroll(function () {
+		var scrollTop = $(document).scrollTop();
+		if (scrollTop >= 200) {
+			$(".for-top").show();
+		} else {
+			$(".for-top").hide();
+		}
+		});
+		$(".for-top").click(function () {
+			$('html,body').animate({
+				scrollTop: 0
+			}, 500);
+		})
+	})
+	document.querySelector(".img1").addEventListener("click", function(){
+		document.querySelector(".mian-img img").src="../img/ABUIABACGAAglur3qQYowJ2ICTCAFDiuCA.jpg"
+		document.querySelector(".mian-list-text h1").innerHTML="DJI Mavic 3 Pro"
+		document.querySelector(".mian-list-text span").innerHTML="4/3 CMOS 哈苏相机 |<br /> 双焦段长焦相机 |<br /> Cine 版三摄支持 Apple ProRes 编码 |<br /> 43 分钟飞行时间 | 全向避障 |<br /> 15 公里高清图传"
+		var chartDom = document.querySelector('.main');
+		var myChart = echarts.init(chartDom);
+		var option;
+		option = {
+			title: {
+			    text: '月产品销量(万)'
+			},
+			legend: {
+			    data: ['销量']
+			},
+			xAxis: {
+		    type: 'category',
+		    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月',]
+			},
+			yAxis: {
+		    type: 'value'
+			},
+			series: [
+				{
+				name: '销量',
+				data: [150, 230, 224, 218, 135, 147, 260,134,543,543,543,789],
+				type: 'line'
+				}
+			]
+		};
+		option && myChart.setOption(option);
+	});
+	document.querySelector(".img2").addEventListener("click", function(){
+		document.querySelector(".mian-img img").src="../img/ABUIABACGAAglPP3qQYozK6bwgUwgBQ4owc!800x800.jpg.webp"
+		document.querySelector(".mian-list-text h1").innerHTML="DJI Mini 4 Pro"
+		document.querySelector(".mian-list-text span").innerHTML="轻于 249 克  |<br /> 4K/60fps HDR 无损竖拍 |<br /> 全向主动避障 |<br /> 可选 34/45 分钟续航 |20 公里全高清图传 |<br />全向智能跟随"
+		var chartDom = document.querySelector('.main');
+		var myChart = echarts.init(chartDom);
+		var option;
+		option = {
+			title: {
+			    text: '月产品销量(万)'
+			},
+			legend: {
+			    data: ['销量']
+			},
+			xAxis: {
+		    type: 'category',
+		    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月',]
+			},
+			yAxis: {
+		    type: 'value'
+			},
+			series: [
+				{
+				name: '销量',
+				data: [240, 250, 724, 218, 635, 107, 257,334,503,343,521,249],
+				type: 'line'
+				}
+			]
+		};
+		option && myChart.setOption(option);
+	});
+	document.querySelector(".img3").addEventListener("click", function(){
+		document.querySelector(".mian-img img").src="../img/ABUIABACGAAg_oWLqAYow6mjzAMwgBQ4rgg.jpg"
+		document.querySelector(".mian-list-text h1").innerHTML="DJI Mini 4K "
+		document.querySelector(".mian-list-text span").innerHTML="低于 249 克 |<br /> 简单易上手 |<br /> 10 公里高清图传 |<br /> 智能拍摄模式 |<br /> 31 分钟续航时间 |<br /> 最大抗风等级 5 级"
+		var chartDom = document.querySelector('.main');
+		var myChart = echarts.init(chartDom);
+		var option;
+		option = {
+			title: {
+			    text: '月产品销量(万)'
+			},
+			legend: {
+			    data: ['销量']
+			},
+			xAxis: {
+		    type: 'category',
+		    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月',]
+			},
+			yAxis: {
+		    type: 'value'
+			},
+			series: [
+				{
+				name: '销量',
+				data: [440, 259, 354, 468, 374, 357, 257,374,500,343,321,253],
+				type: 'line'
+				}
+			]
+		};
+		option && myChart.setOption(option);
+	});
+	document.querySelector(".img4").addEventListener("click", function(){
+		document.querySelector(".mian-img img").src="../img/ABUIABACGAAgwIn7lQYolNzj_gEwgBQ4rgg.jpg"
+		document.querySelector(".mian-list-text h1").innerHTML="DJI Avata 2"
+		document.querySelector(".mian-list-text span").innerHTML="沉浸式飞行体验 |<br /> 体感操控你也能飞 |<br /> 一键动感花飞 |<br /> 4K 超广低空视角 |<br /> 一体化桨保更安全 |<br /> 自由穿梭易出片"
+		var chartDom = document.querySelector('.main');
+		var myChart = echarts.init(chartDom);
+		var option;
+		option = {
+			title: {
+			    text: '月产品销量(万)'
+			},
+			legend: {
+			    data: ['销量']
+			},
+			xAxis: {
+		    type: 'category',
+		    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月',]
+			},
+			yAxis: {
+		    type: 'value'
+			},
+			series: [
+				{
+				name: '销量',
+				data: [340, 250, 234, 518, 635, 327, 457,392,543,443,561,549],
+				type: 'line'
+				}
+			]
+		};
+		option && myChart.setOption(option);
+	});
+	</script>
+</html>

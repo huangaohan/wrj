@@ -1,0 +1,44 @@
+body{
+	background-image: url('../img/bg.jpg');
+	background-size: cover; 
+	background-repeat: no-repeat; 
+}
+.login{
+	width: 400px;
+	height: 550px;
+	border: 1px solid black;
+	background-color: rgb(255 255 255/.6);
+	border-radius: 20px;
+	margin: 10% auto;
+}
+.user,.user_password{
+	width: 60%;
+	height: 30px;
+	margin: 10px auto;
+}
+.user input,.user_password input{
+	border: none;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+.btn{
+	width: 100px;
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+}
+.there{
+	width: 50%;
+	margin: 30px auto;
+}
+.there-img{
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.there img{
+	width: 50px;
+	height: 50%;
+}

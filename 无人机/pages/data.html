@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="favicon.ico"/>
+    <title>产品详细</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        .box {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .item {
+            position: absolute;
+        }
+
+        img {
+            border-radius: 8px;
+            border: 1px solid #999;
+            padding: 10px;
+            background-color: #fff;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        // 获取图片数据
+        var imgData = `{
+            "data": [
+                { "src": "i11.jpg" },
+                { "src": "i12.jpg" },
+                { "src": "i11.jpg" },
+                { "src": "i12.jpg" },
+                { "src": "i11.jpg" },
+                { "src": "i14.jpg" },
+                { "src": "i11.jpg" },
+                { "src": "i12.jpg" },
+                { "src": "i14.jpg" },
+				{ "src": "i12.jpg" },
+                { "src": "i12.jpg" },
+                { "src": "i12.jpg" },
+                { "src": "i11.jpg" },
+                { "src": "i12.jpg" },
+                { "src": "i11.jpg" }
+            ]
+        }`;
+
+        // 将JSON数据转换为JS对象
+        var imgData = JSON.parse(imgData);
+
+        // 将图片渲染到页面中
+        var str = '';
+
+        for (var i=0; i<imgData.data.length; i++) {
+            str += `<div class="item"><img src="img/${imgData.data[i].src}" /></div>`;
+        }
+        
+        // 获取页面中的box容器
+        var box = document.querySelector('.box');
+        box.innerHTML = str;
+
+
+        window.onload = function() {
+            waterfall();
+        };
+        // 更改窗口尺寸时，重新计算并渲染列
+        window.onresize = function() {
+            waterfall();
+        };
+        window.onscroll = function() {
+            var res = scrollFn();
+
+            if (res) {//如果到了最后一张图
+                // 获取box容器
+                var box = document.querySelector('.box');
+
+                // 再创建一些新的item和里面的内容，并将它们渲染到页面
+                for (var i=0; i<imgData.data.length; i++) {
+                    // 创建图片（利用Image构造方法创建）
+                    var img = new Image();
+                    img.src = 'img/' + imgData.data[i].src;
+                    
+                    // 创建图片的容器，即item
+                    var div = document.createElement('div');
+                    div.className = 'item';
+                    
+                    div.appendChild(img);
+                    
+                    box.appendChild(div);
+                }
+
+                // 调用waterfall方法，对新创建的item进行排列
+                waterfall();
+            }
+        };
+
+        // 定义一个方法，该方法的作用是对页面中的图片进行排列
+        function waterfall() {
+            // 获取页面中的所有的item
+            var items = document.querySelectorAll('.item');
+            
+            // 获取item的宽度(注意：item的宽度是一样)
+            var itemWidth = items[0].offsetWidth;
+            
+            // 获取视口的宽度
+            var bodyWidth = document.documentElement.clientWidth || document.body.clientWidth;
+            
+            // 计算一行中可以容纳下多少个item
+            var num = Math.floor(bodyWidth / itemWidth);
+
+            // 设置box容器的宽度，使box可以水平居中
+            box.style.width = num * itemWidth + 'px';
+
+            // 定义一个数组，该数组的作用是用来存储每列的高度
+            var itemHeight = [];
+
+            // 将页面中的item进行位移，即重新排列图片的位置
+            for (var i=0; i<items.length; i++) {
+                if (i < num) {// 第一行
+                    items[i].style.top = 0; // 第一行的top都是0
+                    items[i].style.left = itemWidth * i + 'px';
+                    // 获取每一列的高度，将高度放在数组itemHeight中
+                    itemHeight.push(items[i].offsetHeight);
+
+                } else {
+                    // 获取最小的列高
+                    var minItemHeight = Math.min.apply(null, itemHeight); // 282
+                    
+                    // 根据最小高度，获取其下标
+                    var index = itemHeight.indexOf(minItemHeight);
+                   
+                    // 将当前的item的位置进行设置
+                    items[i].style.left = items[index].offsetLeft + 'px'
+                    items[i].style.top = minItemHeight + 'px';
+
+                    // 重新设置列的高度
+                    itemHeight[index] = minItemHeight + items[i].offsetHeight;
+                }
+            }
+        }
+
+
+        // 定义一个方法，该方法的功能是判断最后一张图是否已经显示了，如果显示了，需要往页面中添加新的内容
+        function scrollFn() {
+            // 获取当拉动滚动条时被卷上去的内容的高度
+            var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            // 获取视口的高度
+            var bodyHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            
+            // 获取最后一个item距离顶端的偏移量
+            var items = document.querySelectorAll('.item');
+            var lastItem = items[items.length - 1].offsetTop;
+
+
+            // 判断拉动滚动条时是否显示到了最后一张图
+            if (bodyScrollTop + bodyHeight > lastItem) {
+                return true;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
