@@ -56,10 +56,6 @@
 .mian-img img{
 	width: 100%;
 	height: 100%;
-	transition: all 1s;
-}
-..mian-img img:hover{
-	transform: scale(2,3);
 }
 .mian-list{
 	width: 70%;
