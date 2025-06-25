@@ -37,8 +37,8 @@
 	<script>
 		var button=document.querySelector('.btn');
 		button.addEventListener('click',async function(e){
-			const user = document.getElementById("username").value;
-			const password = document.getElementById("password").value;
+			// const user = document.getElementById("username").value;
+			// const password = document.getElementById("password").value;
 			// axios({
 			// 	url:'https://hmajax.itheima.net/api/register',
 			// 	method:"POST",
@@ -62,37 +62,48 @@
 			// 	alert('注册失败')
 			// })
 			e.preventDefault();
-			try{
-				const username=document.getElementById('username').value;
-				const password=document.getElementById('password').value;
-				// 简单哈希
-				const hashedPassword=await sha256(password)
-				// 存储用户数据到 localStorage
-				const user=JSON.parse(localStorage.getItem('users')) || {};
-				if (user[username]){
-					alert('用户名已存在！');
-					return;
-				}
-				user[username]=hashedPassword;
-				localStorage.setItem('user',JSON.stringify(user));
-				alert('注册成功！');
-				window.location.href='login.html';
+			try {
+			        // 1. 获取输入值（使用不同变量名）
+			        const username = document.getElementById('username').value;
+			        const password = document.getElementById('password').value;
+			
+			        // 2. 计算密码哈希
+			        const hashedPassword = await sha256(password);
+			
+			        // 3. 从localStorage获取用户数据
+			        const users = JSON.parse(localStorage.getItem('users')) || {};
+			
+			        // 4. 检查用户名是否已存在
+			        if (users[username]) {
+			            alert('用户名已存在！');
+			            return;
+			        }
+			
+			        // 5. 保存用户数据（使用正确的键名 'users'）
+			        users[username] = hashedPassword;
+			        localStorage.setItem('users', JSON.stringify(users));
+			
+			        alert('注册成功！');
+			        window.location.href = 'login.html';
+			    } catch(error) {
+			        console.error("注册错误:", error);
+			        alert("注册失败，请重试！");
+			    }
+			});
+			
+			// 修复SHA256函数
+			async function sha256(message) {
+			    try {
+			        const encoder = new TextEncoder();
+			        const data = encoder.encode(message);
+			        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+			        const hashArray = Array.from(new Uint8Array(hashBuffer));
+			        // 返回哈希值
+			        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+			    } catch(error) {
+			        console.error("哈希失败:", error);
+			        throw error;
+			    }
 			}
-			catch(error){
-					alert("注册过程中发生错误，请重试！");
-			}
-		});
-		// 简单的 SHA-256 实现
-		async function sha256(message){
-			try{
-				const encoder = new TextEncoder()
-				const data = encoder.encode(message)
-				const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-				const hashArray = Array.from(new Uint8Array(hashBuffer))
-			}catch(error){
-				console.error("哈希失败:", error);
-				throw error; // 抛出错误以便外层处理
-			}
-		}
 	</script>
 </html>
