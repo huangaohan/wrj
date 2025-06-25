@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../css/login.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="../img/favicon.ico"/>
+		<title>登录</title>
+	</head>
+	<body>
+		<div class="login">
+			<h2 style="text-align: center; margin-top: 50px;">登录</h2>
+			<div style="font-size: 15px; margin-left: 20%;">账号:</div>
+			<div class="user">
+				<input type="text" id="" value="" placeholder="请输入账号" />
+			</div>
+			<div style="font-size: 15px; margin-left: 20%;">密码:</div>
+			<div class="user_password">
+				<input type="password" id="" value="" placeholder="请输入密码" />
+			</div>
+			<div style="width: 100%; text-align: center; margin-top: 30px;">
+				<button class="btn">登录</button>
+			</div>
+			<div style="width: 100%; text-align: center; margin-top: 30px;">
+				<a href="../pages/register.html" style="color: black; text-decoration: none;">没有账号,前往注册</a>
+			</div>
+			<div class="there">
+				<div style="text-align: center;">第三方登录</div>
+				<div class="there-img">
+					<img src="../img/QQlogo.png" alt="" srcset="" loading="lazy"/>
+					<img src="../img/wblogo.png" alt="" srcset="" loading="lazy"/>
+					<img src="../img/wxlogo.png" alt="" srcset="" loading="lazy"/>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/axios.js"></script>
+	<script>
+		document.querySelector('.there-img img').addEventListener('click',function(){
+			window.location.href = 'Document.html';
+		})
+		document.querySelector('.btn').addEventListener('click', async function(e){
+			var user=document.querySelector('.user input').value
+			var password=document.querySelector('.user_password input').value
+			// axios({
+			// 	url:'https://hmajax.itheima.net/api/login',
+			// 	method:"POST",
+			// 	headers:{'Content-Type': 'application/json'},
+			// 	data:{
+			// 			"username":user,
+			// 			"password": password
+			// 		}
+			// }).then(function(rest){
+			// 	console.log(rest)
+			// 	if (rest.data.code==10000) {
+			// 		alert('登录成功')
+			// 		// 跳转到指定的 URL 地址
+			// 		location.href = "../pages/Document.html";
+			// 		console.log(rest.data.code)
+			// 	} else{
+			// 		alert('登录失败')
+			// 	}
+			// }).catch(function(error){
+			// 	console.log(error)
+			// 	alert('登录失败')
+			// })
+			e.preventDefault()
+			 // 获取存储的用户数据
+			const users = JSON.parse(localStorage.getItem('users')) || {};
+			const storedPassword = users[user];
+			if (!storedPassword) {
+			    alert('用户名不存在！');
+			    return;
+			}
+			// 验证密码哈希
+			const hashedPassword = await sha256(password);
+			if (hashedPassword !== storedPassword) {
+			    alert('密码错误！');
+			    return;
+			}
+			// 模拟登录状态（存储到 sessionStorage）
+			sessionStorage.setItem('isLoggedIn', 'true');
+			sessionStorage.setItem('currentUser', users);
+			alert('登录成功！');
+			window.location.href = 'Document.html'; // 跳转到受保护页面
+		});
+		// 引入相同的 SHA-256 函数
+		async function sha256(message) {
+		    try {
+		        const encoder = new TextEncoder();
+		        const data = encoder.encode(message);
+		        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+		        const hashArray = Array.from(new Uint8Array(hashBuffer));
+		        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+		    } catch (error) {
+		        console.error("哈希失败:", error);
+		        throw error; // 抛出错误以便外层处理
+		    }
+		}
+	</script>
+</html>
