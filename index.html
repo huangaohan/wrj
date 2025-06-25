@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" href="../favicon.ico"/>
+		<title>注册</title>
+		<link rel="stylesheet" href="../css/enorr.css" />
+	</head>
+	<body>
+		<div class="login">
+			<h2 style="text-align: center; margin-top: 50px;">注册</h2>
+			<div style="font-size: 20px; margin-left: 20%;">账号:</div>
+			<div class="user">
+				<input type="text" id="username" value="" placeholder="请输入账号" />
+			</div>
+			<div style="font-size: 20px; margin-left: 20%;">密码:</div>
+			<div class="user">
+				<input type="text" id="password" value="" placeholder="请输入密码" />
+			</div>
+			<div style="width: 100%; text-align: center; margin-top: 30px;">
+				<button class="btn" type="submit">注册</button>
+			</div>
+			<div style="width: 100%; text-align: center; margin-top: 30px;">
+				<a href="login.html" style="color: black; text-decoration: none;">以有账号,前往登录</a>
+			</div>
+			<div class="there">
+				<div style="text-align: center;">第三方登录</div>
+				<div class="there-img">
+					<img src="../img/QQlogo.png" alt="" srcset="" />
+					<img src="../img/wblogo.png" alt="" srcset="" />
+					<img src="../img/wxlogo.png" alt="" srcset="" />
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/axios.js"></script>
+	<script>
+		var button=document.querySelector('.btn');
+		button.addEventListener('click',async function(e){
+			// const user = document.getElementById("username").value;
+			// const password = document.getElementById("password").value;
+			// axios({
+			// 	url:'https://hmajax.itheima.net/api/register',
+			// 	method:"POST",
+			// 	headers:{'Content-Type': 'application/json'},
+			// 	data:{
+			// 			"username":user,
+			// 			"password": password
+			// 		}
+			// }).then(function(rest){
+			// 	console.log(rest)
+			// 	if (rest.data.code==10000) {
+			// 		alert('注册成功')
+			// 		// 跳转到指定的 URL 地址
+			// 		location.href = "../pages/login.html";
+			// 		console.log(rest.data.code)
+			// 	} else{
+			// 		alert('注册失败')
+			// 	}
+			// }).catch(function(error){
+			// 	console.log(error)
+			// 	alert('注册失败')
+			// })
+			e.preventDefault();
+			try {
+			        // 1. 获取输入值（使用不同变量名）
+			        const username = document.getElementById('username').value;
+			        const password = document.getElementById('password').value;
+			
+			        // 2. 计算密码哈希
+			        const hashedPassword = await sha256(password);
+			
+			        // 3. 从localStorage获取用户数据
+			        const users = JSON.parse(localStorage.getItem('users')) || {};
+			
+			        // 4. 检查用户名是否已存在
+			        if (users[username]) {
+			            alert('用户名已存在！');
+			            return;
+			        }
+			
+			        // 5. 保存用户数据（使用正确的键名 'users'）
+			        users[username] = hashedPassword;
+			        localStorage.setItem('users', JSON.stringify(users));
+			
+			        alert('注册成功！');
+			        window.location.href = './pages/login.html';
+			    } catch(error) {
+			        console.error("注册错误:", error);
+			        alert("注册失败，请重试！");
+			    }
+			});
+			
+			// 修复SHA256函数
+			async function sha256(message) {
+			    try {
+			        const encoder = new TextEncoder();
+			        const data = encoder.encode(message);
+			        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+			        const hashArray = Array.from(new Uint8Array(hashBuffer));
+			        // 返回哈希值
+			        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+			    } catch(error) {
+			        console.error("哈希失败:", error);
+			        throw error;
+			    }
+			}
+	</script>
+</html>
