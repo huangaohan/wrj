@@ -21,7 +21,7 @@
 				<button class="btn" type="submit">注册</button>
 			</div>
 			<div style="width: 100%; text-align: center; margin-top: 30px;">
-				<a href="无人机/pages/login.html" style="color: black; text-decoration: none;">以有账号,前往登录</a>
+				<a href="/无人机/pages/login.html" style="color: black; text-decoration: none;">以有账号,前往登录</a>
 			</div>
 			<div class="there">
 				<div style="text-align: center;">第三方登录</div>
@@ -84,7 +84,7 @@
 			        localStorage.setItem('users', JSON.stringify(users));
 			
 			        alert('注册成功！');
-			        window.location.href = '无人机/pages/login.html';
+			        window.location.href = '/无人机/pages/login.html';
 			    } catch(error) {
 			        console.error("注册错误:", error);
 			        alert("注册失败，请重试！");
